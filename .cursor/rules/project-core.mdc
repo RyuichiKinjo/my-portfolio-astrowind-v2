@@ -1,0 +1,41 @@
+---
+description: プロフィールサイト制作プロジェクトの基本ルール（言語・pnpm・設計書・検証・Git）
+alwaysApply: true
+---
+
+# プロジェクト基本ルール
+
+AstroWind をベースにした個人プロフィールサイトのプロジェクト。
+
+## 参照するドキュメント
+
+- `ai.md`: 開発の設計書。作業は記載の Step 順に1つずつ進め、決定事項が出たら `ai.md` に反映する。
+- `AGENTS.md`: AstroWind の構成・規約。テンプレートの流儀はこちらに従う。
+- `.agents/skills/*.md`: ブログ無効化・ページ追加・ウィジェット利用などの手順書。該当作業の前に必ず確認する。
+
+## コミュニケーション
+
+- ユーザーへの応答・説明は日本語で行う。
+- ユーザーは npm 経験者で pnpm は初めて。pnpm 固有の操作は簡単に説明を添える。
+
+## パッケージマネージャーは pnpm のみ
+
+`AGENTS.md` や skills 内の `npm run xxx` は pnpm に読み替える。`npm install` は実行しない（`package-lock.json` が再生成されロックファイルが二重になるため）。
+
+| 用途 | コマンド |
+| --- | --- |
+| 依存の追加 | `pnpm add xxx` / `pnpm add -D xxx` |
+| 開発サーバー | `pnpm dev`（http://localhost:4321） |
+| ビルド | `pnpm build` |
+| 検証 | `pnpm check` / 自動修正 `pnpm fix` |
+
+## 変更後の検証
+
+1. `pnpm build` が成功すること
+2. `pnpm check`（astro check + ESLint + Prettier）が通ること
+3. 見た目に関わる変更はブラウザで確認すること（ライト/ダークモード、スマホ幅）
+
+## Git
+
+- ブランチは `main`。コミットメッセージは日本語で、変更内容が分かる1行にする。
+- `git push` や GitHub/Vercel 側の設定変更は、実行前にユーザーへ確認する。

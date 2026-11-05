@@ -1,0 +1,34 @@
+---
+description: Astro ページ・コンポーネント編集時のルール（ウィジェット利用、スタイル、画像）
+globs: src/**/*.astro
+alwaysApply: false
+---
+
+# Astro ページ・コンポーネントのルール
+
+## ページは既存ウィジェットの組み合わせで作る
+
+- トップページは `src/pages/homes/personal.astro` の構成をベースにする。
+- セクションは `src/components/widgets/` のウィジェットを props で使う。使える props は `.agents/skills/use-widgets.md` と `src/types.d.ts` で確認する。
+- 見た目の調整は `classes` prop と `bg` スロットで行い、ウィジェット本体をコピー・改造しない。
+- 新しいウィジェットが必要な場合のみ `.agents/skills/add-component.md` に従って作る。
+
+```astro
+<!-- ❌ ウィジェットをコピーしてクラスを1つ変える -->
+<!-- ✅ classes で上書きする -->
+<Steps id="resume" title="職歴" items={items} classes={{ container: 'max-w-3xl' }} />
+```
+
+## スタイル
+
+- 色はハードコードせず、テーマトークン（`text-primary`、`text-muted`、`bg-page` など）を使う。配色の変更は `src/components/CustomStyles.astro` で行う（詳細は `.agents/skills/styling.md`）。
+- ダークモードは `dark:` プレフィックスで対応する。
+- クラスの条件付き指定は `class:list`、上書き可能な className の結合は `twMerge()` を使う。
+
+## 画像・アイコン・リンク
+
+- 自分の画像は `src/assets/images/` に置き、`~/assets/images/...` で import する（Sharp で最適化される）。
+- `alt` には内容が分かる文章を書く。`<h1>` は1ページに1つ（Hero）だけにする。
+- アイコンは Tabler（`tabler:xxx`）を使う。名前は `node_modules/@iconify-json/tabler/icons.json` で存在を確認する。
+- サイト内リンクは `getPermalink()`（`~/utils/permalinks`）を使う。
+- インポートは `~/` エイリアス（`src/` を指す）を使う。
