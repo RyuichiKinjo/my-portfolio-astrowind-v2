@@ -128,7 +128,7 @@ AstroWind 標準から変えた箇所。テンプレート更新を取り込む�
 
 - [ ] **掲載コンテンツの詳細**: Heroテキスト、経歴データ、アバター画像の差し替え方針
 - [ ] **コンポーネント構成**: `personal.astro` 内で使用されているセクションのうち、残すもの・削除するものの選定
-- [ ] **サイトの表示言語**: 日本語 / 英語（`src/config.yaml` の `i18n.language` は現在 `en`）
+- [x] **サイトの表示言語**: 日本語（`src/config.yaml` の `i18n.language: ja`）。本文の日本語化は Step 3 で行う
 - [x] **`.cursor/rules/*.mdc` の導入**（`project-core.mdc` / `astro-pages.mdc` を作成済み）: Composer が AstroWind の流儀（Tailwind CSS、Astroコンポーネント設計）を崩さないようにするためのプロンプト定義
 
 ### テンプレートの残り（Step 2〜3 で対応）
