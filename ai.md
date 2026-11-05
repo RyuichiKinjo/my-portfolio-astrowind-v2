@@ -40,16 +40,61 @@ Cursor Compose（Agentモード）を最大限活用し、手動でのコマン�
 
 ---
 
-## 4. 開発手順・ワークフロー
+## 4. 開発環境・前提
 
-### Step 1: プロジェクトの初期セットアップ
+| 項目              | 内容                                                                                                    |
+| :---------------- | :------------------------------------------------------------------------------------------------------ |
+| OS                | Windows 10                                                                                              |
+| Node.js           | ローカル v24 / GitHub Actions は `.nvmrc`（22）                                                         |
+| pnpm              | 12.16.1（`npm install -g pnpm --allow-scripts=pnpm` で導入。`package.json` の `packageManager` で固定） |
+| GitHub CLI (`gh`) | `winget install GitHub.cli` で導入                                                                      |
+| git               | 2.31.1                                                                                                  |
+
+### 認証・権限
+
+- GitHub CLI はブラウザ認証（`gh auth login --web`）でログイン。デバイスコード入力 → Authorize → スマホでの認証まで必要。
+- ワークフローファイル（`.github/workflows/`）を push するには `workflow` 権限が必要（`gh auth refresh --scopes workflow`）。
+- `gh auth setup-git` により、git の push は GitHub CLI の認証情報を使う。
+
+### 注意点（ハマりどころ）
+
+- Cursor のサンドボックスがこの PC では使えないため、エージェントのコマンド実行は毎回許可が必要。
+- git 2.31 は `git commit --trailer` に未対応。Cursor が自動付与する Co-authored-by はメッセージ本文に直接書いて回避している（git を更新すれば不要）。
+- Windows の git 設定 `core.autocrlf=true` により改行が CRLF になり Prettier が失敗したため、`.gitattributes` で LF に固定。
+
+---
+
+## 5. テンプレートからの変更点
+
+AstroWind 標準から変えた箇所。テンプレート更新を取り込む際は競合に注意する。
+
+| ファイル                                    | 変更内容                                                                                   |
+| :------------------------------------------ | :----------------------------------------------------------------------------------------- |
+| `package-lock.json` / `.gitignore`          | npm 用ロックファイルを削除し、`pnpm-lock.yaml` を管理対象に変更（テンプレートは npm 前提） |
+| `package.json`                              | `packageManager: pnpm@12.16.1` を追加                                                      |
+| `.gitattributes`                            | 新規。改行コードを LF に固定                                                               |
+| `.github/workflows/actions.yaml`            | CI を pnpm 化、Node.js 24 対応版のアクションに更新、`develop` への push でも実行           |
+| `.github/workflows/deploy-pages.yaml`       | 新規。`develop` への push で GitHub Pages（確認環境）へ公開                                |
+| `vendor/integration/utils/configBuilder.ts` | 環境変数 `SITE_URL` / `BASE_PATH` で `site` / `base` を上書きできるよう変更                |
+| `vercel.json`                               | `develop` ブランチのデプロイを無効化                                                       |
+| `src/config.yaml`                           | `site` を本番 URL に変更                                                                   |
+| `.cursor/rules/*.mdc`                       | 新規。Cursor 用ルール（テンプレートの規約は `AGENTS.md` / `.agents/skills/` を参照させる） |
+
+---
+
+## 6. 開発手順・ワークフロー
+
+### Step 1: プロジェクトの初期セットアップ（完了）
 
 1. **AstroWind テンプレートのクローン/セットアップ**
-   - Cursor Composer に指示: AstroWind リポジトリをクローンし、必要なパッケージをインストール。
+   - [arthelokyo/astrowind](https://github.com/arthelokyo/astrowind)（Astro 7 / Tailwind CSS v4）を `--depth 1` でクローンし、テンプレートの履歴は引き継がずに新規リポジトリとして `git init`。
+   - `pnpm install` → `pnpm build` で動作確認。
 2. **リポジトリ連携 (GitHub)**
-   - GitHub 上に `portfolio-site` などのリポジトリを作成し、リモート設定・初回 push。
+   - リポジトリ: [RyuichiKinjo/my-portfolio-astrowind-v2](https://github.com/RyuichiKinjo/my-portfolio-astrowind-v2)（Public）
+   - GitHub Pages の公開方式は「GitHub Actions」。Pages 用の環境 `github-pages` で `develop` ブランチからのデプロイを許可。
 3. **ホスティング設定 (Vercel)**
-   - Vercel コンソール上で GitHub リポジトリと連携（Import Project）。
+   - Vercel コンソールで GitHub リポジトリを Import。プロジェクト名は `rk-playground-v2`（URL に使われる）。
+   - `vercel.json` で `develop` ブランチのデプロイを無効化（確認は GitHub Pages で行うため）。
 
 ---
 
@@ -77,22 +122,31 @@ Cursor Compose（Agentモード）を最大限活用し、手動でのコマン�
 
 ---
 
-## 5. 今後の検討・詳細化が必要な項目（To-Do）
+## 7. 今後の検討・詳細化が必要な項目（To-Do）
 
 設計書をさらに詰めるため、以下の点について仕様を確定していく必要があります。
 
 - [ ] **掲載コンテンツの詳細**: Heroテキスト、経歴データ、アバター画像の差し替え方針
 - [ ] **コンポーネント構成**: `personal.astro` 内で使用されているセクションのうち、残すもの・削除するものの選定
+- [ ] **サイトの表示言語**: 日本語 / 英語（`src/config.yaml` の `i18n.language` は現在 `en`）
 - [x] **`.cursor/rules/*.mdc` の導入**（`project-core.mdc` / `astro-pages.mdc` を作成済み）: Composer が AstroWind の流儀（Tailwind CSS、Astroコンポーネント設計）を崩さないようにするためのプロンプト定義
+
+### テンプレートの残り（Step 2〜3 で対応）
+
+- `src/config.yaml` にテンプレート作者の情報が残っている: サイト名 `AstroWind`、`googleSiteVerificationId`、X（Twitter）の `@arthelokyo`
+- フッター・ヘッダーのリンクがテンプレートのデモページを指している
+
+### 未対応の検討事項
+
+- [ ] 確認環境（GitHub Pages）が検索エンジンにインデックスされないよう `noindex` にするか
+- [ ] git を 2.45 以降に更新するか（`--trailer` 問題の解消）
 
 ---
 
-## 6. 次のステップ
-
-ルールは AstroWind の実際の構成を確認したうえで作成するため、以下の順で進める。
+## 8. 次のステップ
 
 1. [x] Step 1-1: AstroWind のクローンとパッケージインストール
 2. [x] `.cursor/rules/*.mdc` のルール作成（クローンしたコードの構成をもとに定義）
 3. [x] Step 1-2: GitHub リポジトリ連携、GitHub Pages（確認環境）の公開
-4. [ ] Step 1-3: Vercel（本番）連携
-5. [ ] `personal.astro` から `index.astro` への移行手順の指示文作成
+4. [x] Step 1-3: Vercel（本番）連携
+5. [ ] Step 2: `personal.astro` をトップページ（`index.astro`）へ移行し、不要なページを整理
