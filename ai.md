@@ -35,6 +35,7 @@ Cursor Compose（Agentモード）を最大限活用し、手動でのコマン�
    - `develop` ブランチへ push → GitHub Actions で **GitHub Pages（確認環境）** に自動公開
      - URL: https://ryuichikinjo.github.io/my-portfolio-astrowind-v2/
    - 確認して問題なければ `develop` を `main` にマージ → **Vercel（本番）** に自動公開
+     - URL: https://rk-playground-v2.vercel.app
    - 公開先ごとの URL / base の違いは、ビルド時の環境変数 `SITE_URL` / `BASE_PATH` で切り替える（本番値は `src/config.yaml`）。
 
 ---

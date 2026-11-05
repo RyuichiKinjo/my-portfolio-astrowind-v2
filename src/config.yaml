@@ -1,7 +1,7 @@
 site:
   name: AstroWind
   # Production (Vercel). GitHub Pages overrides these with SITE_URL / BASE_PATH in its workflow.
-  site: 'https://my-portfolio-astrowind-v2.vercel.app'
+  site: 'https://rk-playground-v2.vercel.app'
   base: '/'
   trailingSlash: false
 
