@@ -6,6 +6,37 @@
 - **開発対象**: 個人プロフィールサイト（プロトタイプ）
 - **ベーステンプレート**: AstroWind (`src/pages/homes/personal.astro` をメインランディングページとして採用)
 
+### サイトの目的・方針
+
+- **制作の目的**: システムエンジニアとしての AI 開発スキルアップ。前回は自分でコマンド実行・修正していたため、今回は **Cursor の Agent に任せる練習**として進める。
+- **見せたい相手**: 同業の仲間、顧客。自身のポートフォリオとして公開する。
+- **掲載内容**: 自分のプロフィール
+- **ページ構成**: トップ 1 ページにまとめる（`personal.astro` と同じく、ヘッダーのメニューはページ内リンク）
+- **ブログ**: 使わない
+
+### ページ構成（上から順に）
+
+| #   | セクション     | 使用ウィジェット | 内容                                   |
+| :-- | :------------- | :--------------- | :------------------------------------- |
+| 1   | Hero           | `Hero`           | 名前・肩書き・キャッチコピー           |
+| 2   | About          | `Content`        | 自己紹介文・写真・SNS リンク           |
+| 3   | 職歴           | `Steps`          | 職務経歴                               |
+| 4   | スキル         | `Features3`      | 技術スタック・得意領域                 |
+| 5   | 実績・制作物   | `Projects`       | 制作物・成果物（画像・説明・リンク）   |
+| 6   | Call to Action | `CallToAction`   | 締めの呼びかけ（連絡先・SNS への導線） |
+
+- `personal.astro` から外すセクション: 学歴（Education）、お客様の声（Testimonials）、ブログ一覧（BlogLatestPosts）
+
+### 掲載情報の方針
+
+| 項目              | 方針                                                                                     |
+| :---------------- | :--------------------------------------------------------------------------------------- |
+| サイト名          | `RK Playground`（ヘッダーのロゴ、ブラウザのタブ、検索結果・SNS 共有時の表示）            |
+| 表示名            | `Ryuichi Kinjo`（Hero に大きく表示する人物名）                                           |
+| プロフィール画像  | 自分の写真（`src/assets/images/` に配置して最適化）                                      |
+| 連絡手段          | 公開用メールアドレス `playground.rk@gmail.com`（`mailto:` リンク）。フォームは設置しない |
+| SNS・外部サービス | GitHub: https://github.com/RyuichiKinjo 、X: `@rkplayground`（いずれも公開用）           |
+
 ---
 
 ## 2. システム構成・技術スタック
@@ -68,17 +99,22 @@ Cursor Compose（Agentモード）を最大限活用し、手動でのコマン�
 
 AstroWind 標準から変えた箇所。テンプレート更新を取り込む際は競合に注意する。
 
-| ファイル                                    | 変更内容                                                                                   |
-| :------------------------------------------ | :----------------------------------------------------------------------------------------- |
-| `package-lock.json` / `.gitignore`          | npm 用ロックファイルを削除し、`pnpm-lock.yaml` を管理対象に変更（テンプレートは npm 前提） |
-| `package.json`                              | `packageManager: pnpm@12.16.1` を追加                                                      |
-| `.gitattributes`                            | 新規。改行コードを LF に固定                                                               |
-| `.github/workflows/actions.yaml`            | CI を pnpm 化、Node.js 24 対応版のアクションに更新、`develop` への push でも実行           |
-| `.github/workflows/deploy-pages.yaml`       | 新規。`develop` への push で GitHub Pages（確認環境）へ公開                                |
-| `vendor/integration/utils/configBuilder.ts` | 環境変数 `SITE_URL` / `BASE_PATH` で `site` / `base` を上書きできるよう変更                |
-| `vercel.json`                               | `develop` ブランチのデプロイを無効化                                                       |
-| `src/config.yaml`                           | `site` を本番 URL に変更                                                                   |
-| `.cursor/rules/*.mdc`                       | 新規。Cursor 用ルール（テンプレートの規約は `AGENTS.md` / `.agents/skills/` を参照させる） |
+| ファイル                                    | 変更内容                                                                                                                                                                      |
+| :------------------------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `package-lock.json` / `.gitignore`          | npm 用ロックファイルを削除し、`pnpm-lock.yaml` を管理対象に変更（テンプレートは npm 前提）                                                                                    |
+| `package.json`                              | `packageManager: pnpm@12.16.1` を追加                                                                                                                                         |
+| `.gitattributes`                            | 新規。改行コードを LF に固定                                                                                                                                                  |
+| `.github/workflows/actions.yaml`            | CI を pnpm 化、Node.js 24 対応版のアクションに更新、`develop` への push でも実行                                                                                              |
+| `.github/workflows/deploy-pages.yaml`       | 新規。`develop` への push で GitHub Pages（確認環境）へ公開                                                                                                                   |
+| `vendor/integration/utils/configBuilder.ts` | 環境変数 `SITE_URL` / `BASE_PATH` で `site` / `base` を上書きできるよう変更                                                                                                   |
+| `vercel.json`                               | `develop` ブランチのデプロイを無効化                                                                                                                                          |
+| `src/config.yaml`                           | 本番 URL、サイト名 `RK Playground`、説明文、X アカウント、言語 `ja`、ブログ無効化。テンプレート作者の `googleSiteVerificationId` を削除                                       |
+| `.cursor/rules/*.mdc`                       | 新規。Cursor 用ルール（テンプレートの規約は `AGENTS.md` / `.agents/skills/` を参照させる）                                                                                    |
+| `src/navigation.ts`                         | 全面書き換え。`profile`（名前・メール・GitHub・X）を一元管理し、ヘッダー（ページ内リンク）とフッター（SNS アイコン・著作権表示）を定義                                        |
+| `src/pages/index.astro`                     | `personal.astro` の構成をもとに作り直し。構造化データを組織（Organization）から個人（Person）に変更                                                                           |
+| `src/layouts/PageLayout.astro`              | テンプレートの告知バー（Announcement）と RSS アイコンを既定で表示しないよう変更                                                                                               |
+| `src/pages/404.astro`                       | 文言を日本語化                                                                                                                                                                |
+| 削除                                        | デモページ（`homes/`、`landing/`、about、contact、pricing、services、terms、privacy）、ブログ記事（`src/data/post/`）、`LandingLayout.astro`、Decap CMS（`public/decapcms/`） |
 
 ---
 
@@ -98,12 +134,20 @@ AstroWind 標準から変えた箇所。テンプレート更新を取り込む�
 
 ---
 
-### Step 2: テンプレートの切り替えと構成調整
+### Step 2: テンプレートの切り替えと構成調整（完了）
 
 1. **トップページの差し替え**
-   - 原則として `src/pages/homes/personal.astro` のレイアウトと構造を `src/pages/index.astro` に適用（またはルーティングを調整）。
+   - `personal.astro` の構成を `index.astro` に移し、「ページ構成」の 6 セクションに絞った。本文はテンプレートのまま（Step 3 で差し替え）。
+   - セクションの id（ページ内リンク先）: `#hero` / `#about` / `#career` / `#skills` / `#works`
+   - ボタン・リンクはメール（`mailto:`）、GitHub、X に付け替え。
 2. **不要なページの整理**
-   - 不要なブログ記事データやサンプルページのクリーンアップを Composer に依頼。
+   - ブログを無効化（`.agents/skills/disable-blog.md` に従う）。`src/pages/[...blog]/` と `rss.xml.ts` はページを生成しないので残置。
+   - デモページ・ブログ記事・Decap CMS を削除。生成されるページはトップと 404 のみ。
+3. **ヘッダー・フッター**
+   - ヘッダー: ロゴ（サイト名）、メニュー（プロフィール / 職歴 / スキル / 実績）、テーマ切替、「お問い合わせ」ボタン（メール）
+   - フッター: サイト名、GitHub / X / メールのアイコン、`© 年 Ryuichi Kinjo`
+4. **既知の警告**
+   - ビルド時に `[glob-loader] No files found ... src/data/post` が出る。ブログ記事を削除したためで、動作に影響はない。
 
 ---
 
@@ -127,14 +171,17 @@ AstroWind 標準から変えた箇所。テンプレート更新を取り込む�
 設計書をさらに詰めるため、以下の点について仕様を確定していく必要があります。
 
 - [ ] **掲載コンテンツの詳細**: Heroテキスト、経歴データ、アバター画像の差し替え方針
-- [ ] **コンポーネント構成**: `personal.astro` 内で使用されているセクションのうち、残すもの・削除するものの選定
+- [x] **コンポーネント構成**: 「ページ構成」の 6 セクションに決定
 - [x] **サイトの表示言語**: 日本語（`src/config.yaml` の `i18n.language: ja`）。本文の日本語化は Step 3 で行う
 - [x] **`.cursor/rules/*.mdc` の導入**（`project-core.mdc` / `astro-pages.mdc` を作成済み）: Composer が AstroWind の流儀（Tailwind CSS、Astroコンポーネント設計）を崩さないようにするためのプロンプト定義
 
-### テンプレートの残り（Step 2〜3 で対応）
+### テンプレートの残り
 
-- `src/config.yaml` にテンプレート作者の情報が残っている: サイト名 `AstroWind`、`googleSiteVerificationId`、X（Twitter）の `@arthelokyo`
-- フッター・ヘッダーのリンクがテンプレートのデモページを指している
+- [x] `src/config.yaml` のテンプレート作者の情報（サイト名、`googleSiteVerificationId`、X アカウント）→ Step 2 で対応済み
+- [x] ヘッダー・フッターのデモページへのリンク → Step 2 で対応済み
+- [ ] トップページの本文・画像（Step 3 で差し替え）
+- [x] ロゴの 🚀 絵文字（`src/components/Logo.astro`）→ Step 2 で削除済み
+- [ ] ファビコン、SNS 共有用の画像（`src/assets/images/default.png`）→ 仕上げで差し替え
 
 ### 未対応の検討事項
 
@@ -149,4 +196,5 @@ AstroWind 標準から変えた箇所。テンプレート更新を取り込む�
 2. [x] `.cursor/rules/*.mdc` のルール作成（クローンしたコードの構成をもとに定義）
 3. [x] Step 1-2: GitHub リポジトリ連携、GitHub Pages（確認環境）の公開
 4. [x] Step 1-3: Vercel（本番）連携
-5. [ ] Step 2: `personal.astro` をトップページ（`index.astro`）へ移行し、不要なページを整理
+5. [x] Step 2: `personal.astro` をトップページ（`index.astro`）へ移行し、不要なページを整理
+6. [ ] Step 3: 各セクションの本文を自分のプロフィールに差し替え（Hero → About → 職歴 → スキル → 実績 → CTA）
