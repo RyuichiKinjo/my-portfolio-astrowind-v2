@@ -37,5 +37,8 @@ AstroWind をベースにした個人プロフィールサイトのプロジェ�
 
 ## Git
 
-- ブランチは `main`。コミットメッセージは日本語で、変更内容が分かる1行にする。
-- `git push` や GitHub/Vercel 側の設定変更は、実行前にユーザーへ確認する。
+- 作業は `develop` ブランチで行う。push すると GitHub Pages（確認環境）に公開される。
+- ユーザーが確認環境で OK を出したら `develop` を `main` にマージし、Vercel（本番）に公開する。`main` へ直接コミットしない。
+- サイトの URL / base は `src/config.yaml`（本番値）で管理し、GitHub Pages 用の値はワークフローの環境変数 `SITE_URL` / `BASE_PATH` で上書きする。
+- コミットメッセージは日本語で、変更内容が分かる1行にする。
+- `main` へのマージ・push や、GitHub/Vercel 側の設定変更は、実行前にユーザーへ確認する。

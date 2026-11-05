@@ -15,8 +15,9 @@
 | **エディタ / AI**           | Cursor (Composer / Agent)      | コーディング・プロンプトベースでの全自動/半自動操作 |
 | **フレームワーク**          | Astro (AstroWind テンプレート) | 静的サイトジェネレーター (SSG)                      |
 | **ソース管理**              | GitHub                         | リポジトリ管理・バージョンコントロール              |
-| **デプロイ / ホスティング** | Vercel                         | GitHub連携による自動CI/CDおよび公開環境             |
-| **パッケージマネージャー**  | pnpm (または npm)              | 依存関係管理                                        |
+| **デプロイ / ホスティング** | Vercel                         | `main` ブランチから自動公開する本番環境             |
+| **確認環境**                | GitHub Pages (GitHub Actions)  | `develop` ブランチから自動公開する確認環境          |
+| **パッケージマネージャー**  | pnpm                           | 依存関係管理                                        |
 
 ---
 
@@ -30,8 +31,11 @@ Cursor Compose（Agentモード）を最大限活用し、手動でのコマン�
      - ※ 旧形式の `.cursorrules` は非推奨のため使用しない。
 2. **Git & GitHub 連携**:
    - Cursor内ターミナルまたはComposerへの指示経由で、Git commit / push、ブランチ作成等を自動化する。
-3. **Vercel 連携**:
-   - GitHubの `main` ブランチ連携による自動ビルド・デプロイを利用する。
+3. **公開フロー（確認環境 → 本番）**:
+   - `develop` ブランチへ push → GitHub Actions で **GitHub Pages（確認環境）** に自動公開
+     - URL: https://ryuichikinjo.github.io/my-portfolio-astrowind-v2/
+   - 確認して問題なければ `develop` を `main` にマージ → **Vercel（本番）** に自動公開
+   - 公開先ごとの URL / base の違いは、ビルド時の環境変数 `SITE_URL` / `BASE_PATH` で切り替える（本番値は `src/config.yaml`）。
 
 ---
 
@@ -86,7 +90,8 @@ Cursor Compose（Agentモード）を最大限活用し、手動でのコマン�
 
 ルールは AstroWind の実際の構成を確認したうえで作成するため、以下の順で進める。
 
-1. Step 1-1: AstroWind のクローンとパッケージインストール
-2. `.cursor/rules/*.mdc` のルール作成（クローンしたコードの構成をもとに定義）
-3. Step 1-2 / 1-3: GitHub リポジトリ連携、Vercel 連携
-4. `personal.astro` から `index.astro` への移行手順の指示文作成
+1. [x] Step 1-1: AstroWind のクローンとパッケージインストール
+2. [x] `.cursor/rules/*.mdc` のルール作成（クローンしたコードの構成をもとに定義）
+3. [x] Step 1-2: GitHub リポジトリ連携、GitHub Pages（確認環境）の公開
+4. [ ] Step 1-3: Vercel（本番）連携
+5. [ ] `personal.astro` から `index.astro` への移行手順の指示文作成

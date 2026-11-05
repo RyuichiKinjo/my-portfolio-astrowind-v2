@@ -1,4 +1,9 @@
 {
+  "git": {
+    "deploymentEnabled": {
+      "develop": false
+    }
+  },
   "cleanUrls": true,
   "trailingSlash": false,
   "headers": [

@@ -94,7 +94,13 @@ const getSite = (config: Config) => {
     googleSiteVerificationId: '',
   };
 
-  return merge({}, _default, config?.site ?? {}) as SiteConfig;
+  // Lets one codebase deploy to hosts with different URLs (e.g. GitHub Pages under a sub-path).
+  const envOverrides = {
+    ...(process.env.SITE_URL && { site: process.env.SITE_URL }),
+    ...(process.env.BASE_PATH && { base: process.env.BASE_PATH }),
+  };
+
+  return merge({}, _default, config?.site ?? {}, envOverrides) as SiteConfig;
 };
 
 const getMetadata = (config: Config) => {
