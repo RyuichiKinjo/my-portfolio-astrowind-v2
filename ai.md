@@ -16,14 +16,17 @@
 
 ### ページ構成（上から順に）
 
-| #   | セクション     | 使用ウィジェット | 内容                                   |
-| :-- | :------------- | :--------------- | :------------------------------------- |
-| 1   | Hero           | `Hero`           | 名前・肩書き・キャッチコピー           |
-| 2   | About          | `Content`        | 自己紹介文・写真・SNS リンク           |
-| 3   | 職歴           | `Steps`          | 職務経歴                               |
-| 4   | スキル         | `Features3`      | 技術スタック・得意領域                 |
-| 5   | 実績・制作物   | `Projects`       | 制作物・成果物（画像・説明・リンク）   |
-| 6   | Call to Action | `CallToAction`   | 締めの呼びかけ（連絡先・SNS への導線） |
+ヘッダー・セクション見出し・ボタンは英語でそろえる（About / Experience / Skills / Works / Tech Stack / Contact）。
+
+| #   | セクション | 使用ウィジェット | 内容                                 |
+| :-- | :--------- | :--------------- | :----------------------------------- |
+| 1   | Hero       | `Hero`           | 名前・肩書き・キャッチコピー         |
+| 2   | About      | `Content`        | 自己紹介文・写真・SNS リンク         |
+| 3   | Experience | `Steps`          | 職務経歴                             |
+| 4   | Skills     | `Features3`      | 得意領域・スキル                     |
+| 5   | Works      | `Projects`       | 制作物・成果物（画像・説明・リンク） |
+| 6   | Tech Stack | `Integrations`   | このサイトの使用技術                 |
+| 7   | Contact    | `CallToAction`   | 締めの呼びかけ（メールへの導線）     |
 
 - `personal.astro` から外すセクション: 学歴（Education）、お客様の声（Testimonials）、ブログ一覧（BlogLatestPosts）
 

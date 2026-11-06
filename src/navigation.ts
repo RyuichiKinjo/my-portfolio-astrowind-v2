@@ -11,12 +11,13 @@ export const mailtoLink = `mailto:${profile.email}`;
 
 export const headerData = {
   links: [
-    { text: 'プロフィール', href: getPermalink('/#about') },
-    { text: '職歴', href: getPermalink('/#career') },
-    { text: 'スキル', href: getPermalink('/#skills') },
-    { text: '実績', href: getPermalink('/#works') },
+    { text: 'About', href: getPermalink('/#about') },
+    { text: 'Experience', href: getPermalink('/#experience') },
+    { text: 'Skills', href: getPermalink('/#skills') },
+    { text: 'Works', href: getPermalink('/#works') },
+    { text: 'Tech Stack', href: getPermalink('/#stack') },
   ],
-  actions: [{ text: 'お問い合わせ', href: mailtoLink }],
+  actions: [{ text: 'Contact', href: mailtoLink }],
 };
 
 export const footerData = {
@@ -25,7 +26,7 @@ export const footerData = {
   socialLinks: [
     { ariaLabel: 'GitHub', icon: 'tabler:brand-github', href: profile.github },
     { ariaLabel: 'X', icon: 'tabler:brand-x', href: profile.x },
-    { ariaLabel: 'メール', icon: 'tabler:mail', href: mailtoLink },
+    { ariaLabel: 'Email', icon: 'tabler:mail', href: mailtoLink },
   ],
   footNote: `© ${new Date().getFullYear()} ${profile.name}`,
 };

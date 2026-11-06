@@ -6,6 +6,7 @@ import Content from '~/components/widgets/Content.astro';
 import Steps from '~/components/widgets/Steps.astro';
 import Features3 from '~/components/widgets/Features3.astro';
 import Projects from '~/components/widgets/Projects.astro';
+import Integrations from '~/components/widgets/Integrations.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import StructuredData from '~/components/common/StructuredData.astro';
 import { SITE, METADATA, I18N } from 'astrowind:config';
@@ -52,7 +53,7 @@ const structuredData = [
     id="hero"
     title="Ryuichi Kinjo"
     tagline="System Engineer"
-    actions={[{ variant: 'primary', text: 'お問い合わせ', href: mailtoLink }]}
+    actions={[{ variant: 'primary', text: 'Contact', href: mailtoLink }]}
   >
     <Fragment slot="subtitle">
       I'm a Graphic Designer passionate about crafting visual stories. <br /> With 5 years of experience and a degree from
@@ -86,7 +87,7 @@ const structuredData = [
       {
         icon: 'tabler:mail',
         callToAction: {
-          text: 'メール',
+          text: 'Email',
           href: mailtoLink,
         },
       },
@@ -98,7 +99,7 @@ const structuredData = [
     }}
   >
     <Fragment slot="content">
-      <h2 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">About me</h2>
+      <h2 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">About</h2>
       <p>
         Welcome to my creative journey. My work is a testament to my commitment to bringing ideas to life, where each
         pixel becomes a brushstroke in the canvas of imagination.
@@ -120,8 +121,8 @@ const structuredData = [
   <!-- Steps Widget ****************** -->
 
   <Steps
-    id="career"
-    title="Work experience"
+    id="experience"
+    title="Experience"
     items={[
       {
         title:
@@ -179,7 +180,7 @@ const structuredData = [
 
   <Projects
     id="works"
-    title="Elevating visual narratives"
+    title="Works"
     subtitle="Embark on a design journey that surpasses pixels, entering a realm of imagination. Explore my portfolio, where passion and creativity converge to shape enthralling visual narratives."
     items={[
       {
@@ -218,15 +219,80 @@ const structuredData = [
     ]}
   />
 
+  <!-- Integrations Widget *********** -->
+
+  <Integrations
+    id="stack"
+    title="Tech Stack"
+    subtitle="Tools used to build and ship this site."
+    columns={4}
+    items={[
+      {
+        name: 'AstroWind',
+        description: 'Site template',
+        icon: 'tabler:rocket',
+        href: 'https://github.com/arthelokyo/astrowind',
+      },
+      {
+        name: 'Astro',
+        description: 'Static site generator',
+        icon: 'tabler:brand-astro',
+        href: 'https://astro.build',
+      },
+      {
+        name: 'Tailwind CSS',
+        description: 'Styling',
+        icon: 'tabler:brand-tailwind',
+        href: 'https://tailwindcss.com',
+      },
+      {
+        name: 'TypeScript',
+        description: 'Language',
+        icon: 'tabler:brand-typescript',
+        href: 'https://www.typescriptlang.org',
+      },
+      {
+        name: 'pnpm',
+        description: 'Package manager',
+        icon: 'tabler:package',
+        href: 'https://pnpm.io',
+      },
+      {
+        name: 'GitHub',
+        description: 'Source control',
+        icon: 'tabler:brand-github',
+        href: profile.github,
+      },
+      {
+        name: 'GitHub Pages',
+        description: 'Staging',
+        icon: 'tabler:world',
+        href: 'https://ryuichikinjo.github.io/my-portfolio-astrowind-v2/',
+      },
+      {
+        name: 'Vercel',
+        description: 'Production',
+        icon: 'tabler:brand-vercel',
+        href: 'https://rk-playground-v2.vercel.app',
+      },
+      {
+        name: 'Cursor',
+        description: 'AI-assisted development',
+        icon: 'tabler:code',
+        href: 'https://cursor.com',
+      },
+    ]}
+  />
+
   <!-- CallToAction Widget *********** -->
 
   <CallToAction
-    title="Let's create together"
+    title="Contact"
     subtitle="Ready to transform your vision into captivating designs?"
     actions={[
       {
         variant: 'primary',
-        text: 'お問い合わせ',
+        text: 'Contact',
         href: mailtoLink,
       },
     ]}
