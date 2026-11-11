@@ -1,0 +1,351 @@
+{
+  "profile": {
+    "name": "金城 竜一",
+    "nameKana": "キンジョウ リュウイチ",
+    "role": "System Engineer / Full Stack Developer",
+    "qualifications": [
+      "ORACLE OCJ-P Gold SE7",
+      "ORACLE OCJ-WC",
+      "ORACLE MASTER Silver 11g",
+      "基本情報技術者",
+      "生成AIパスポート",
+      "FP3級",
+      "簿記3級"
+    ]
+  },
+  "skillCategories": [
+    {
+      "category": "Languages",
+      "skills": [
+        { "name": "Java", "level": "Expert", "experienceYears": 10 },
+        { "name": "JavaScript / TypeScript", "level": "Advanced", "experienceYears": 5 },
+        { "name": "PHP", "level": "Intermediate" },
+        { "name": "SQL / PL/SQL", "level": "Expert", "experienceYears": 10 },
+        { "name": "VBA", "level": "Intermediate", "experienceYears": 3 },
+        { "name": "C#.NET / VB.NET", "level": "Intermediate", "experienceYears": 2 }
+      ]
+    },
+    {
+      "category": "Frameworks & Libraries",
+      "skills": [
+        { "name": "Spring / Spring Boot", "category": "Backend" },
+        { "name": "Struts / Struts2", "category": "Backend" },
+        { "name": "Laravel", "category": "Backend" },
+        { "name": "Angular", "category": "Frontend" },
+        { "name": "jQuery", "category": "Frontend" },
+        { "name": "TERASOLUNA", "category": "Framework" },
+        { "name": "楽々FW", "category": "Framework" },
+        { "name": "intra-mart / accel platform", "category": "Framework" }
+      ]
+    },
+    {
+      "category": "Databases",
+      "skills": [
+        { "name": "Oracle Database (9i / 10g / 11g / 12c)" },
+        { "name": "DB2" },
+        { "name": "PostgreSQL" },
+        { "name": "SQL Server" },
+        { "name": "Cassandra" }
+      ]
+    },
+    {
+      "category": "OS & Middleware",
+      "skills": [
+        { "name": "Windows / Windows Server" },
+        { "name": "RedHat Linux / CentOS" },
+        { "name": "Apache / GlassFish / WebOTX" },
+        { "name": "HULFT" },
+        { "name": "ASTERIA WARP" }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "id": "proj-01",
+      "title": "金融向け 顧客管理システム",
+      "period": "2022/11 - 2026/12",
+      "industry": "金融",
+      "role": "SE（オンラインチームリーダー）",
+      "teamSize": "10名",
+      "phases": ["要件定義", "基本設計", "詳細設計", "製造", "単体テスト", "結合テスト", "総合テスト"],
+      "technologies": {
+        "languages": ["Java"],
+        "frameworks": ["楽々FW"],
+        "databases": ["DB2"],
+        "environment": ["Windows"]
+      },
+      "description": "要件定義のための技術調査、設計、テスト仕様書作成、課題管理、およびオンラインチームのリーダーとして開発メンバーのフォローを担当。"
+    },
+    {
+      "id": "proj-02",
+      "title": "情報通信向け 広告管理システム",
+      "period": "2022/06 - 2022/10",
+      "industry": "情報",
+      "role": "PG（開発リーダー）",
+      "teamSize": "5名",
+      "phases": ["基本設計", "詳細設計", "製造", "単体テスト", "結合テスト"],
+      "technologies": {
+        "languages": ["Java"],
+        "environment": ["Windows"]
+      },
+      "description": "開発リーダーとして開発業務およびメンバーのフォローを担当。"
+    },
+    {
+      "id": "proj-03",
+      "title": "金融向け 顧客管理システム（要件定義）",
+      "period": "2022/04 - 2022/05",
+      "industry": "金融",
+      "role": "SE",
+      "teamSize": "2名",
+      "phases": ["要件定義"],
+      "technologies": {
+        "languages": ["JavaScript"],
+        "environment": ["Windows"]
+      },
+      "description": "要件定義のための技術調査を担当。"
+    },
+    {
+      "id": "proj-04",
+      "title": "電力会社向け 契約管理システム",
+      "period": "2021/10 - 2022/03",
+      "industry": "電力",
+      "role": "PG（開発リーダー）",
+      "teamSize": "3名",
+      "phases": ["要件定義"],
+      "technologies": {
+        "languages": ["Java"],
+        "environment": ["Windows"]
+      },
+      "description": "開発リーダーとして開発およびメンバーフォローを担当。"
+    },
+    {
+      "id": "proj-05",
+      "title": "人材業界向け 契約管理システム（スマホアプリ対応）",
+      "period": "2021/02 - 2021/09",
+      "industry": "人材",
+      "role": "SE",
+      "teamSize": "10名",
+      "phases": ["基本設計", "詳細設計", "製造", "単体テスト", "結合テスト"],
+      "technologies": {
+        "languages": ["PHP"],
+        "frameworks": ["Angular", "Laravel"],
+        "environment": ["Windows", "Android", "iOS"]
+      },
+      "description": "基本設計、開発、テストまで一貫して対応。AndroidおよびiPhone向けスマートフォン対応アプリの開発を担当。"
+    },
+    {
+      "id": "proj-06",
+      "title": "金融向け 顧客管理システム",
+      "period": "2020/05 - 2021/01",
+      "industry": "金融",
+      "role": "SE",
+      "teamSize": "5名",
+      "phases": ["基本設計", "詳細設計", "製造", "単体テスト", "結合テスト"],
+      "technologies": {
+        "languages": ["Java"],
+        "frameworks": ["WACs"],
+        "environment": ["Windows"]
+      },
+      "description": "主に設計、テスト仕様書作成、課題管理、PGメンバーのフォローなどを実施。"
+    },
+    {
+      "id": "proj-07",
+      "title": "通信業界向け サポート業務",
+      "period": "2020/04 - 2020/04",
+      "industry": "通信",
+      "role": "PG",
+      "teamSize": "5名",
+      "phases": ["製造", "単体テスト"],
+      "technologies": {
+        "environment": ["Windows"]
+      },
+      "description": "サポートメンバーとして課題対応などを実施。"
+    },
+    {
+      "id": "proj-08",
+      "title": "通信業界向け 顧客管理システム",
+      "period": "2019/12 - 2020/03",
+      "industry": "通信",
+      "role": "SE（オンラインチームリーダー）",
+      "teamSize": "5名",
+      "phases": ["基本設計", "詳細設計", "製造", "単体テスト", "結合テスト", "総合テスト"],
+      "technologies": {
+        "languages": ["Java"],
+        "frameworks": ["TERASOLUNA"],
+        "environment": ["Windows"]
+      },
+      "description": "オンラインチームのリーダーとして基本設計からテストまで一貫して対応。"
+    },
+    {
+      "id": "proj-09",
+      "title": "金融向け システム開発・製造",
+      "period": "2019/04 - 2019/11",
+      "industry": "金融",
+      "role": "PG",
+      "phases": ["製造", "単体テスト"],
+      "technologies": {
+        "environment": ["Windows"]
+      },
+      "description": "製造および単体テスト工程を担当。"
+    },
+    {
+      "id": "proj-10",
+      "title": "医療業界向け データ管理システム",
+      "period": "2018/11 - 2019/03",
+      "industry": "医療",
+      "role": "PG",
+      "teamSize": "5名",
+      "phases": ["製造", "単体テスト"],
+      "technologies": {
+        "languages": ["C#.NET"],
+        "tools": ["Visual Studio"],
+        "environment": ["Windows"]
+      },
+      "description": "主に開発や上流PGとして他のPGメンバーのフォローを担当。"
+    },
+    {
+      "id": "proj-11",
+      "title": "金融向け 顧客管理システム",
+      "period": "2017/08 - 2018/10",
+      "industry": "金融",
+      "role": "SE",
+      "teamSize": "15名",
+      "phases": ["基本設計", "詳細設計", "製造", "単体テスト", "結合テスト", "総合テスト", "リリース"],
+      "technologies": {
+        "languages": ["Java"],
+        "frameworks": ["WACs"],
+        "databases": ["DB2"],
+        "environment": ["Windows"]
+      },
+      "description": "主に課題管理、設計、テスト仕様書作成、PGメンバーのフォローなどを担当。"
+    },
+    {
+      "id": "proj-12",
+      "title": "業務支援システム（マスタメンテナンス機能）",
+      "period": "2017/05 - 2017/06",
+      "industry": "販売",
+      "role": "SE",
+      "teamSize": "26名",
+      "phases": ["基本設計", "詳細設計", "製造", "単体テスト"],
+      "technologies": {
+        "languages": ["Java"],
+        "frameworks": ["SpringBoot"],
+        "databases": ["Cassandra"],
+        "environment": ["Windows7"]
+      },
+      "description": "Webサービスの設計、製造、単体テストを担当。主にマスタメンテナンスに関する機能を開発。"
+    },
+    {
+      "id": "proj-13",
+      "title": "小売業向け EDIシステム",
+      "period": "2016/12 - 2017/05",
+      "industry": "小売",
+      "role": "SE",
+      "teamSize": "15名",
+      "phases": ["基本設計", "詳細設計", "製造", "単体テスト"],
+      "technologies": {
+        "languages": ["Java"],
+        "frameworks": ["Struts2"],
+        "databases": ["Oracle"],
+        "environment": ["Windows7"]
+      },
+      "description": "基本設計・詳細設計を担当。設計の詰めの作業や製造担当者への仕様展開を牽引。"
+    },
+    {
+      "id": "proj-14",
+      "title": "商品マスタメンテナンスシステム",
+      "period": "2016/06 - 2016/11",
+      "industry": "小売",
+      "role": "SE",
+      "teamSize": "30名",
+      "phases": ["基本設計", "詳細設計", "製造"],
+      "technologies": {
+        "languages": ["Java"],
+        "frameworks": ["Struts2"],
+        "databases": ["Oracle"],
+        "environment": ["Windows7"]
+      },
+      "description": "基本設計、詳細設計および画面製造を担当。顧客や元請けと直接連携しながら設計を主導。"
+    },
+    {
+      "id": "proj-15",
+      "title": "官公庁向け 新規業務システム",
+      "period": "2015/11 - 2016/05",
+      "industry": "公共",
+      "role": "SE",
+      "teamSize": "5名",
+      "phases": ["基本設計", "機能設計", "詳細設計", "製造", "単体テスト"],
+      "technologies": {
+        "languages": ["Java"],
+        "frameworks": ["WebOTX"],
+        "databases": ["Oracle"],
+        "environment": ["Windows7"]
+      },
+      "description": "各種設計ドキュメントの作成および画面製造を担当。単体テスト時の仕様変更対応を完遂。"
+    },
+    {
+      "id": "proj-16",
+      "title": "電機メーカー向け 商品管理システムリプレイス",
+      "period": "2014/10 - 2015/05",
+      "industry": "電機",
+      "role": "サブリーダー",
+      "teamSize": "20名",
+      "phases": ["基本設計", "詳細設計", "製造", "単体テスト", "結合テスト", "統合テスト"],
+      "technologies": {
+        "languages": ["Java", "Groovy", "JSP", "SQL"],
+        "tools": ["WebCenterSites", "Apache"],
+        "databases": ["Oracle 12c"],
+        "environment": ["Windows7", "CentOS"]
+      },
+      "description": "パッケージを用いた商品管理システムリプレイスにて、カタログサイト機能を担当。画面設計から実装、テスト仕様作成まで一貫して実施。"
+    },
+    {
+      "id": "proj-17",
+      "title": "不動産業向け マンション管理システム開発",
+      "period": "2013/08 - 2014/09",
+      "industry": "不動産",
+      "role": "PG / SE",
+      "teamSize": "50名",
+      "phases": ["詳細設計", "製造", "単体テスト", "結合テスト"],
+      "technologies": {
+        "languages": ["Java", "PL/SQL"],
+        "frameworks": ["楽々FW"],
+        "databases": ["Oracle 12c"],
+        "environment": ["Windows7", "RedHat Linux"]
+      },
+      "description": "新規システム開発にて、設計への落とし込みから製造・テストまで一貫して担当。"
+    },
+    {
+      "id": "proj-18",
+      "title": "公共系 職員管理システム構築",
+      "period": "2012/04 - 2012/06",
+      "industry": "公共",
+      "role": "リーダー",
+      "teamSize": "5名",
+      "phases": ["詳細設計", "製造", "単体テスト"],
+      "technologies": {
+        "languages": ["Java", "JSP", "SQL"],
+        "frameworks": ["intra-mart 7.2"],
+        "databases": ["Oracle 11g"],
+        "environment": ["Windows7", "RedHat Linux"]
+      },
+      "description": "開発チームのリーダーを担当。詳細設計、メンバーの技術支援、スケジュール管理および上流チームとの調整業務に従事。"
+    },
+    {
+      "id": "proj-19",
+      "title": "不動産管理向け エネルギー管理システム",
+      "period": "2011/02 - 2011/05",
+      "industry": "不動産",
+      "role": "サブリーダー",
+      "teamSize": "3名",
+      "phases": ["要件定義", "基本設計", "詳細設計", "製造", "単体テスト", "結合テスト", "統合テスト", "運用保守"],
+      "technologies": {
+        "languages": ["C#.NET", "VBA", "SQL", "Apex"],
+        "tools": ["Salesforce"],
+        "databases": ["Oracle 10g"],
+        "environment": ["Windows7", "RedHat Linux"]
+      },
+      "description": "法改正対応に伴う基幹連携新規システムのサブリーダーとして、要件定義から運用までマネージメントを含め幅広く担当。"
+    }
+  ]
+}

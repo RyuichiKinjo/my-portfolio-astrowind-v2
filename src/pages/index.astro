@@ -1,16 +1,17 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
 
-import Hero from '~/components/widgets/Hero.astro';
 import Content from '~/components/widgets/Content.astro';
-import Steps from '~/components/widgets/Steps.astro';
 import Features3 from '~/components/widgets/Features3.astro';
-import Projects from '~/components/widgets/Projects.astro';
 import Integrations from '~/components/widgets/Integrations.astro';
-import CallToAction from '~/components/widgets/CallToAction.astro';
 import StructuredData from '~/components/common/StructuredData.astro';
+import { Icon } from 'astro-icon/components';
+import Headline from '~/components/ui/Headline.astro';
+import Timeline from '~/components/ui/Timeline.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import { SITE, METADATA, I18N } from 'astrowind:config';
 import { profile, mailtoLink } from '~/navigation';
+import career from '~/data/career.json';
 
 const metadata = {
   title: SITE?.name,
@@ -21,6 +22,8 @@ const metadata = {
 const personId = `${SITE?.site}/#person`;
 const sameAs = [
   profile.github,
+  profile.youtube,
+  profile.niconico,
   ...(METADATA?.twitter?.handle ? [`https://x.com/${METADATA.twitter.handle.replace(/^@/, '')}`] : []),
 ];
 const structuredData = [
@@ -42,30 +45,65 @@ const structuredData = [
     sameAs,
   },
 ];
+
+const visibleExperienceCount = 3;
+
+const escapeHtml = (value: string) =>
+  value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
+const formatSkill = (skill: { name: string; level?: string; experienceYears?: number; category?: string }) => {
+  const detail = [skill.level, skill.experienceYears != null ? `${skill.experienceYears}年` : undefined, skill.category]
+    .filter(Boolean)
+    .join(' · ');
+  return escapeHtml(detail ? `${skill.name} · ${detail}` : skill.name);
+};
+
+const skillIcons: Record<string, string> = {
+  Languages: 'tabler:code',
+  'Frameworks & Libraries': 'tabler:box',
+  Databases: 'tabler:database',
+  'OS & Middleware': 'tabler:server',
+};
+
+const skillItems = [
+  ...career.skillCategories.map((group) => ({
+    title: group.category,
+    description: group.skills.map((skill) => formatSkill(skill)).join('<br />'),
+    icon: skillIcons[group.category] ?? 'tabler:point-filled',
+  })),
+  {
+    title: 'Qualifications',
+    description: career.profile.qualifications.map((name) => escapeHtml(name)).join('<br />'),
+    icon: 'tabler:certificate',
+  },
+];
+
+const experienceItems = career.projects.map((project) => {
+  const meta = [project.role, project.industry, project.teamSize].filter(Boolean).join(' · ');
+  const technologies = Object.values(project.technologies).flat().join(' · ');
+  const phases = project.phases.join(' / ');
+  const description = [project.description, technologies, phases]
+    .filter(Boolean)
+    .map((line) => escapeHtml(line))
+    .join('<br />');
+
+  return {
+    title: `${escapeHtml(project.title)}<br /><span class="font-normal">${escapeHtml(meta)}</span><br /><span class="text-sm font-normal">${escapeHtml(project.period)}</span>`,
+    description,
+    icon: 'tabler:briefcase',
+  };
+});
+
+const visibleExperience = experienceItems.slice(0, visibleExperienceCount);
+const earlierExperience = experienceItems.slice(visibleExperienceCount);
 ---
 
 <Layout metadata={metadata}>
   <StructuredData slot="head" schema={structuredData} />
 
-  <!-- Hero Widget ******************* -->
-
-  <Hero
-    id="hero"
-    title="Ryuichi Kinjo"
-    tagline="System Engineer"
-    actions={[{ variant: 'primary', text: 'Contact', href: mailtoLink }]}
-  >
-    <Fragment slot="subtitle">
-      I'm a Graphic Designer passionate about crafting visual stories. <br /> With 5 years of experience and a degree from
-      New York University's School of Design. I infuse vitality into brands and designs, transforming concepts into captivating
-      realities.
-    </Fragment>
-  </Hero>
-
-  <!-- Content Widget **************** -->
+  <!-- Intro: name beside the profile photo **************** -->
 
   <Content
-    id="about"
     columns={3}
     items={[
       {
@@ -93,138 +131,63 @@ const structuredData = [
       },
     ]}
     image={{
-      src: 'https://images.unsplash.com/photo-1491349174775-aaafddd81942?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
-      alt: 'Colorful Image',
+      src: '~/assets/images/profile.jpg',
+      alt: 'Ryuichi Kinjo standing in a forest stream',
+      aspect: '3/4',
       loading: 'eager',
     }}
   >
     <Fragment slot="content">
-      <h2 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">About</h2>
-      <p>
-        Welcome to my creative journey. My work is a testament to my commitment to bringing ideas to life, where each
-        pixel becomes a brushstroke in the canvas of imagination.
+      <p class="mb-1 text-sm font-bold tracking-wide text-secondary uppercase dark:text-blue-200">System Engineer</p>
+      <h1 class="mb-4 text-3xl font-bold tracking-tight text-heading sm:text-4xl">{profile.name}</h1>
+      <p class="mb-4">
+        フリーランスのシステムエンジニアとして、10年以上働いています。要件定義からリリースまで、一貫して担当するのが得意です。
       </p>
-      <br />
-      <p>
-        I find inspiration in the world around me, whether through the pages of a captivating novel, the intricate
-        details of typography, or the vibrant hues of nature during my outdoor escapades.
+      <p class="mb-4">
+        Javaを軸に、バックエンドからフロントエンドまで、いろいろな業種で経験してきました。リーダーとして進めることも多いですが、立場にはこだわらず、そのときのプロジェクトに合わせて動きます。
       </p>
-      <br />
-      <p>If you're curious to dive deeper into my work, you can follow me:</p>
-    </Fragment>
-
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+      <p class="mb-4">最近は Next.js や Astro、Cursor などの AI ツールを使った開発も、楽しく学んでいます。</p>
+      <p>学生時代は野球に打ち込んでいました。趣味は旅行、街ブラ、温泉、料理、ギター、釣り、お酒です。</p>
     </Fragment>
   </Content>
 
-  <!-- Steps Widget ****************** -->
+  <!-- Experience *********************** -->
 
-  <Steps
-    id="experience"
-    title="Experience"
-    items={[
-      {
-        title:
-          'Graphic Designer <br /> <span class="font-normal">ABC Design Studio, New York, NY</span> <br /> <span class="text-sm font-normal">2021 - Present</span>',
-        description: `Collaborate with clients to understand design requirements and objectives. <br /> Develop branding solutions, including logos, color palettes, and brand guidelines. <br /> Design marketing materials such as brochures, posters, and digital assets. <br /> Create visually appealing user interfaces for websites and applications.`,
-        icon: 'tabler:briefcase',
-      },
-      {
-        title:
-          'Junior Graphic Designer <br /> <span class="font-normal">XYZ Creative Agency, Los Angeles, CA</span> <br /> <span class="text-sm font-normal">2018 - 2021</span>',
-        description: `Assisted senior designers in creating design concepts and visual assets. <br /> Contributed to the development of brand identities and marketing collateral. <br /> Collaborated with the marketing team to ensure consistent design across campaigns. <br /> Gained hands-on experience in various design software and tools.`,
-        icon: 'tabler:briefcase',
-      },
-    ]}
-    classes={{ container: 'max-w-3xl' }}
-  />
+  <WidgetWrapper id="experience" containerClass="max-w-3xl">
+    <Headline
+      title="Experience"
+      classes={{
+        container: 'max-w-3xl text-left rtl:text-right',
+        title: 'text-3xl lg:text-4xl',
+      }}
+    />
+    <Timeline items={visibleExperience} defaultIcon="tabler:briefcase" />
+    {
+      earlierExperience.length > 0 && (
+        <details class="group mt-2">
+          <summary class="flex w-fit cursor-pointer list-none items-center gap-2 py-2 text-sm font-semibold text-primary outline-offset-4 [&::-webkit-details-marker]:hidden">
+            <span class="group-open:hidden">Show earlier experience ({earlierExperience.length})</span>
+            <span class="hidden group-open:inline">Hide earlier experience</span>
+            <Icon name="tabler:chevron-down" class="h-4 w-4 transition-transform duration-200 group-open:rotate-180" />
+          </summary>
+          <div class="mt-6">
+            <Timeline items={earlierExperience} defaultIcon="tabler:briefcase" />
+          </div>
+        </details>
+      )
+    }
+  </WidgetWrapper>
 
   <!-- Features3 Widget ************** -->
 
-  <Features3
-    id="skills"
-    title="Skills"
-    subtitle="Discover the proficiencies that allow me to bring imagination to life through design."
-    columns={3}
-    defaultIcon="tabler:point-filled"
-    items={[
-      {
-        title: 'Graphic design',
-        description: 'Proficient in crafting visually appealing designs that convey messages effectively.',
-      },
-      {
-        title: 'Branding and identity',
-        description: 'Skilled at developing cohesive brand identities, including logos and brand guidelines.',
-      },
-      {
-        title: 'User-centered design',
-        description: 'Experienced in creating user-friendly interfaces and optimizing user experiences.',
-      },
-      {
-        title: 'Adobe Creative Suite',
-        description: 'Skilled in using Photoshop, Illustrator, and InDesign to create and edit visual elements.',
-      },
-      {
-        title: 'Typography',
-        description: 'Adept in selecting and manipulating typefaces to enhance design aesthetics.',
-      },
-      {
-        title: 'Color theory',
-        description: 'Proficient in using color to evoke emotions and enhance visual harmony.',
-      },
-    ]}
-  />
-
-  <!-- Projects Widget *************** -->
-
-  <Projects
-    id="works"
-    title="Works"
-    subtitle="Embark on a design journey that surpasses pixels, entering a realm of imagination. Explore my portfolio, where passion and creativity converge to shape enthralling visual narratives."
-    items={[
-      {
-        title: 'Brand identity for tech innovators',
-        description:
-          'A complete identity for a tech startup: a dynamic logo, a vibrant palette, stationery, website graphics and social media assets, from concept to execution.',
-        image: {
-          src: 'https://images.unsplash.com/photo-1658248165252-71e116af1b34?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=928&q=80',
-          alt: 'Tech Design Image',
-        },
-        tags: ['Branding', 'Logo', 'Social media'],
-        result: 'Recognised by 3 design awards',
-      },
-      {
-        title: 'Event poster for an art & music festival',
-        description:
-          'Bold typography, vibrant colours and abstract elements that depict the fusion of visual art and music for the ArtWave Fusion festival.',
-        image: {
-          src: 'https://images.unsplash.com/photo-1619983081563-430f63602796?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
-          alt: 'Art and Music Poster Image',
-        },
-        tags: ['Print', 'Illustration'],
-        result: 'Sold out two weeks before the event',
-      },
-      {
-        title: 'E-commerce redesign for a fashion brand',
-        description:
-          'A new online presence for GreenVogue, aligned with its sustainable ethos: intuitive navigation, sustainable materials highlighted and a friendlier checkout.',
-        image: {
-          src: 'https://images.unsplash.com/photo-1664455340023-214c33a9d0bd?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80',
-          alt: 'Fashion e-commerce Image',
-        },
-        tags: ['UX', 'E-commerce', 'Web'],
-        result: '+24 % conversion rate after launch',
-      },
-    ]}
-  />
+  <Features3 id="skills" title="Skills" columns={2} items={skillItems} />
 
   <!-- Integrations Widget *********** -->
 
   <Integrations
     id="stack"
     title="Tech Stack"
-    subtitle="Tools used to build and ship this site."
+    subtitle="このサイトの制作と公開に使っているツールです。"
     columns={4}
     items={[
       {
@@ -280,20 +243,6 @@ const structuredData = [
         description: 'AI-assisted development',
         icon: 'tabler:code',
         href: 'https://cursor.com',
-      },
-    ]}
-  />
-
-  <!-- CallToAction Widget *********** -->
-
-  <CallToAction
-    title="Contact"
-    subtitle="Ready to transform your vision into captivating designs?"
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Contact',
-        href: mailtoLink,
       },
     ]}
   />

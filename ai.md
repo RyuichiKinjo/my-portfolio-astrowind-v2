@@ -16,29 +16,32 @@
 
 ### ページ構成（上から順に）
 
-ヘッダー・セクション見出し・ボタンは英語でそろえる（About / Experience / Skills / Works / Tech Stack / Contact）。
+ヘッダー・セクション見出し・ボタンは英語でそろえる（Experience / Skills / Tech Stack / Contact）。冒頭に About という見出しは置かない。本文の Contact セクションは置かない（ヘッダーの Contact とフッターのメールで足りる）。
 
-| #   | セクション | 使用ウィジェット | 内容                                 |
-| :-- | :--------- | :--------------- | :----------------------------------- |
-| 1   | Hero       | `Hero`           | 名前・肩書き・キャッチコピー         |
-| 2   | About      | `Content`        | 自己紹介文・写真・SNS リンク         |
-| 3   | Experience | `Steps`          | 職務経歴                             |
-| 4   | Skills     | `Features3`      | 得意領域・スキル                     |
-| 5   | Works      | `Projects`       | 制作物・成果物（画像・説明・リンク） |
-| 6   | Tech Stack | `Integrations`   | このサイトの使用技術                 |
-| 7   | Contact    | `CallToAction`   | 締めの呼びかけ（メールへの導線）     |
+| #   | セクション | 使用ウィジェット | 内容                                                    |
+| :-- | :--------- | :--------------- | :------------------------------------------------------ |
+| 1   | 冒頭       | `Content`        | 肩書き・名前・自己紹介・写真・SNS                       |
+| 2   | Experience | `Timeline`       | `career.json` の職歴。直近3件を表示し、残りは折りたたみ |
+| 3   | Skills     | `Features3`      | `career.json` のスキルと資格                            |
+| 4   | Tech Stack | `Integrations`   | このサイトの使用技術                                    |
 
-- `personal.astro` から外すセクション: 学歴（Education）、お客様の声（Testimonials）、ブログ一覧（BlogLatestPosts）
+中身ができるまで出さないセクション:
+
+- **Samples**（`Projects`、`#samples`）: 自分で作る見本サイト。1件できてから追加する。
+- **Works**（`Projects`、`#works`）: 受注して納めたサイト。実績ができてから追加する。追加するときは Samples と Tech Stack の間に置く。
+
+テンプレートから外すセクション: 学歴（Education）、お客様の声（Testimonials）、ブログ一覧（BlogLatestPosts）。
 
 ### 掲載情報の方針
 
-| 項目              | 方針                                                                                     |
-| :---------------- | :--------------------------------------------------------------------------------------- |
-| サイト名          | `RK Playground`（ヘッダーのロゴ、ブラウザのタブ、検索結果・SNS 共有時の表示）            |
-| 表示名            | `Ryuichi Kinjo`（Hero に大きく表示する人物名）                                           |
-| プロフィール画像  | 自分の写真（`src/assets/images/` に配置して最適化）                                      |
-| 連絡手段          | 公開用メールアドレス `playground.rk@gmail.com`（`mailto:` リンク）。フォームは設置しない |
-| SNS・外部サービス | GitHub: https://github.com/RyuichiKinjo 、X: `@rkplayground`（いずれも公開用）           |
+| 項目              | 方針                                                                                                                                                              |
+| :---------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| サイト名          | `RK Playground`（ヘッダーのロゴ、ブラウザのタブ、検索結果・SNS 共有時の表示）                                                                                     |
+| 表示名            | `Ryuichi Kinjo`（写真の横、自己紹介文の上。画面中央の大きな見出しにはしない）                                                                                     |
+| 自己紹介          | 写真の横に4段落。フリーランスとしての経歴、担当範囲、最近の学習、趣味                                                                                             |
+| プロフィール画像  | `src/assets/images/profile.jpg`（About の写真。Sharp で最適化）                                                                                                   |
+| 連絡手段          | 公開用メールアドレス `playground.rk@gmail.com`（`mailto:` リンク）。フォームは設置しない                                                                          |
+| SNS・外部サービス | GitHub: https://github.com/RyuichiKinjo 、X: `@rkplayground` 、YouTube: `@rk-playground` 、ニコニコ動画: https://www.nicovideo.jp/user/25040646（いずれも公開用） |
 
 ---
 
