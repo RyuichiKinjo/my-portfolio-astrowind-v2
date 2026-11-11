@@ -123,6 +123,22 @@ const earlierExperience = experienceItems.slice(visibleExperienceCount);
         },
       },
       {
+        icon: 'tabler:brand-youtube',
+        callToAction: {
+          target: '_blank',
+          text: 'YouTube',
+          href: profile.youtube,
+        },
+      },
+      {
+        icon: 'niconico',
+        callToAction: {
+          target: '_blank',
+          text: 'ニコニコ動画',
+          href: profile.niconico,
+        },
+      },
+      {
         icon: 'tabler:mail',
         callToAction: {
           text: 'Email',
@@ -166,8 +182,8 @@ const earlierExperience = experienceItems.slice(visibleExperienceCount);
       earlierExperience.length > 0 && (
         <details class="group mt-2">
           <summary class="flex w-fit cursor-pointer list-none items-center gap-2 py-2 text-sm font-semibold text-primary outline-offset-4 [&::-webkit-details-marker]:hidden">
-            <span class="group-open:hidden">Show earlier experience ({earlierExperience.length})</span>
-            <span class="hidden group-open:inline">Hide earlier experience</span>
+            <span class="group-open:hidden">以前の職歴を表示（{earlierExperience.length}）</span>
+            <span class="hidden group-open:inline">以前の職歴を閉じる</span>
             <Icon name="tabler:chevron-down" class="h-4 w-4 transition-transform duration-200 group-open:rotate-180" />
           </summary>
           <div class="mt-6">
